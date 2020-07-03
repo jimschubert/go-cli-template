@@ -31,7 +31,7 @@ jobs:
           # Replace placeholders in the initialization files
           find .github/initialization/ -type f -exec sed -i "s/%NAME%/$NAME/g" {} +
           find .github/initialization/ -type f -exec sed -i "s/%REPOSITORY%/${GITHUB_REPOSITORY/\//\\/}/g" {} +
-          find .github/initialization/ -type f -exec sed -i "s/%PACKAGE%/PACKAGE/g" {} +
+          find .github/initialization/ -type f -exec sed -i "s/%PACKAGE%/$PACKAGE/g" {} +
 
           # Remove lines marked with #REMOVE-ON-CLEANUP#
           find . -type f -exec sed -i '/#REMOVE-ON-CLEANUP#/d' {} +
