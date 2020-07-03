@@ -38,6 +38,7 @@ jobs:
 
           # Move content
           cp -R .github/initialization/* .
+          cp -R .github/initialization/cmd/* cmd/
 
           # Cleanup
           rm -rf .github/initialization
