@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	app "go-cli-template"
+	app "%PACKAGE%"
 	"os"
 	"strings"
 
