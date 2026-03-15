@@ -12,31 +12,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build workflow: Builds and releases the Go application using GoReleaser.
-# Triggers on pushes to main/master branches and version tags (v*).
-# Creates GitHub releases and pushes Docker images for tagged versions.
+# PR workflow: Runs build and lint checks on pull requests.
+# Uses a reusable workflow from jimschubert/.workflows for consistency.
 
-name: Build Go
+name: Build Go (PR)
 on:
-  push:
-    branches: [ 'main', 'master' ]
-    tags: [ 'v[0-9]+.[0-9]+.[0-9]+' ]
+  pull_request:
 
 permissions:
-  contents: write
-  packages: write
-  # id-token is required for attestation (signing)
-  id-token: write
-  attestations: write
-  artifact-metadata: write
+  contents: read
+  pull-requests: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   build:
-    uses: jimschubert/.workflows/.github/workflows/go-build-goreleaser.yml@main
+    uses: jimschubert/.workflows/.github/workflows/go-pr.yml@main
     with:
-      golangci-lint-version: 'v2.9.0'
+      golangci-lint-version: "v2.9.0"
     secrets: inherit

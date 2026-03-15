@@ -1,9 +1,5 @@
 module go-cli-template
 
-go 1.14
+go 1.26
 
-require (
-	github.com/jessevdk/go-flags v1.4.0
-	github.com/sirupsen/logrus v1.5.0
-)
-
+require github.com/alecthomas/kong v1.14.0
